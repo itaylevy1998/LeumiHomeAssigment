@@ -1,7 +1,7 @@
 services:
   flask:
     build:
-      context: Gunicorn
+      context: App
       dockerfile: Dockerfile
     image: flask
     ports: 
