@@ -3,3 +3,11 @@
 !*.gitignore
 !*.md
 !*.yaml
+!*Jenkinsfile*
+!*.py
+!*.txt
+!*.html
+!*Dockerfile*
+!*.tf
+
+.terraform

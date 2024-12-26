@@ -28,6 +28,14 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                withCredentials([aws(credentialsId: 'leumi-user')]) {
+                    sh "aws eks --region eu-west-3 update-kubeconfig --name app-cluster" 
+                    sh "helm upgrade --install app ./appChart"
+                }
+            }
+        }
     }
 
 }

@@ -8,10 +8,30 @@ the cidr blocks are 10.0.0.0, 10.0.0.1, 10.0.0.2, 10.0.0.3, with subnet mask of 
 * private RT, with 1 route, only for vpc, assign it to the 2 private subnets.
 5) create NAT gateway, and add it to the private-rt as gateway. (or nat instance)
 
+IAM:
+1) create a group, and add the policies for ECR, and add a user to it.
 
 Jenkins setup:
 1) Launch an EC2 instance, with a t2.medium type (ubuntu image).
 2) sg for jenkins: [ssh 22 only medium, port 8080 for anyone (needs to be changed!!!)] 
 3) ssh into the instance, install docker (script), and create a container running jenkins(using compose).
+4) Install Amazon ECR plugin and Docker pipeline.
+5) Add credentials: the 'leumi' IAM user.
+6) configure github as a repository to checkout the code.
+7) configure ECR as the container registry instead of dockerhub/
+
+Agent setup:
+1) create a dockerfile with everything needed for the agent to run the pipeline
+2) push it to ECR
+3) install docker and java on the agent
+4) add the ssh key for the agent as a jenkins credential, and create a node for this agent. 
+
+pipeline setup:
+1) create multibranch pipeline and point to the github repository
+2) add the github pat as a jenkins credential.
+3) add iam user 'leumi-user' as credentials
+4) install plugins: docker pipeline, Amazon ECR.
+
+
 
 
