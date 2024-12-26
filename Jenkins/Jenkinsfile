@@ -6,12 +6,26 @@ pipeline {
             args "--privileged -u 0:0 -v /var/run/docker.sock:/var/run/docker.sock"
         }
     }
+    enviroment {
+        ECR_URL = "831926627653.dkr.ecr.eu-west-3.amazonaws.com"
+        ECR_APP_REPO = "leumi/app"
+        IMAGE_NAME = "flask:latest"
+        IMAGE_VERSION = "1.0"
+    }
     stages {
-        stage('Build Image') {
+        stage('Build') {
             steps {
                 sh "docker-compose build"
                 sh "docker images"
-                
+            }
+        }
+        stage('Publish') {
+            steps {
+                withCredentials([aws(credentialsId: 'leumi-user')]) {
+                    sh "aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin ${ECR_URL}"
+                    sh "docker tag ${IMAGE_NAME} ${ECR_URL}/${ECR_APP_REPO}:${IMAGE_VERSION}"
+                    sh "docker push ${ECR_URL}/${ECR_APP_REPO}:${IMAGE_VERSION}"
+                }
             }
         }
 
