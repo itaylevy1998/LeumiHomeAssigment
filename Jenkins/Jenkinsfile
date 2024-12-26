@@ -13,27 +13,27 @@ pipeline {
             // }
             steps {
                 sh "this is the build stage!"
-                sh "docker-compose build"
+ //               sh "docker-compose build"
                 sh "docker images"
             }
         }
-        stage('Publish image') {
-            steps {
-                sh "this is publish stage"
-            }
+        // stage('Publish image') {
+        //     steps {
+        //         sh "this is publish stage"
+        //     }
             
-            //ecr login
-            //ecr push image
-        }
-        stage('Deploy') {
-            steps {
-                // aws eks kubeconfig
-                //kubectl apply -f deployment
-                // kubectl apply -f service
-                // kubectl apply -f ingress
-                sh "this is deploy stage!"
-            }
-        }
+        //     //ecr login
+        //     //ecr push image
+        // }
+        // stage('Deploy') {
+        //     steps {
+        //         // aws eks kubeconfig
+        //         //kubectl apply -f deployment
+        //         // kubectl apply -f service
+        //         // kubectl apply -f ingress
+        //         sh "this is deploy stage!"
+        //     }
+        // }
     }
 
 }
