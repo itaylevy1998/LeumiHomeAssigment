@@ -18,7 +18,10 @@ pipeline {
             }
         }
         stage('Publish image') {
-            sh "this is publish stage"
+            steps {
+                sh "this is publish stage"
+            }
+            
             //ecr login
             //ecr push image
         }
