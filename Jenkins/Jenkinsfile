@@ -1,11 +1,34 @@
 pipeline {
-    agent any 
+    agent {
+        docker {
+            alwaysPull true
+            image 'agent:latest'
+            args "--privileged -u 0:0 -v /var/run/docker.sock:/var/run/docker.sock"
+        }
+    }
     stages {
-        stage('test stage') {
+        stage('Build Image') {
+            // when {
+            //     changeset "App/**"
+            // }
             steps {
-                sh "pwd"
-                sh "ls"
-                sh "echo hello world!"
+                sh "this is the build stage!"
+                sh "docker-compose build ."
+                sh "docker images"
+            }
+        }
+        stage('Publish image') {
+            sh "this is publish stage"
+            //ecr login
+            //ecr push image
+        }
+        stage('Deploy') {
+            steps {
+                // aws eks kubeconfig
+                //kubectl apply -f deployment
+                // kubectl apply -f service
+                // kubectl apply -f ingress
+                sh "this is deploy stage!"
             }
         }
     }
