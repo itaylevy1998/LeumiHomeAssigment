@@ -6,7 +6,7 @@ pipeline {
             args "--privileged -u 0:0 -v /var/run/docker.sock:/var/run/docker.sock"
         }
     }
-    enviroment {
+    environment {
         ECR_URL = "831926627653.dkr.ecr.eu-west-3.amazonaws.com"
         ECR_APP_REPO = "leumi/app"
         IMAGE_NAME = "flask:latest"
@@ -28,7 +28,6 @@ pipeline {
                 }
             }
         }
-
     }
 
 }
