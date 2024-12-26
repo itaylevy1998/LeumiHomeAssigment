@@ -9,8 +9,7 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-                sh "whoami"
-                sh "ls"
+                sh "docker-compose build"
                 sh "docker images"
                 
             }
