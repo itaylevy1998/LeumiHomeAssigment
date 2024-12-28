@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "pwd"
-                sh "docker-compose build"
+                sh "docker-compose -f Question1/compose.yaml build"
             }
         }
         stage('Publish') {
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 withCredentials([aws(credentialsId: 'eks-user')]) {
                     sh "aws eks --region ${CLUSTER_REGION} update-kubeconfig --name ${CLUSTER_NAME}" 
-                    sh "helm upgrade --install app ./AppChart"
+                    sh "helm upgrade --install app Question1/AppChart"
                 }
             }
         }
