@@ -9,5 +9,6 @@
 !*.html
 !*Dockerfile*
 !*.tf
+!*.sh
 /Keys
 .terraform
