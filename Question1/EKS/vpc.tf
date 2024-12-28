@@ -2,7 +2,7 @@ resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "leumi-vpc"
+    Name = "eks-vpc"
   }
 }
 
@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "leumi-igw"
+    Name = "eks-igw"
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "private-subnet-1" {
   availability_zone = local.zone1
 
   tags = {
-    Name                                  = "private-subnet-1"
+    Name                              = "eks-private-subnet-1"
     "kubernetes.io/role/internal-elb" = "1"
 
   }
@@ -32,7 +32,7 @@ resource "aws_subnet" "private-subnet-2" {
   availability_zone = local.zone2
 
   tags = {
-    Name                                  = "private-subnet-2"
+    Name                              = "eks-private-subnet-2"
     "kubernetes.io/role/internal-elb" = "1"
 
   }
@@ -44,7 +44,7 @@ resource "aws_subnet" "public-subnet-1" {
   availability_zone = local.zone1
 
   tags = {
-    Name                         = "public-subnet-1"
+    Name                     = "eks-public-subnet-1"
     "kubernetes.io/role/elb" = "1"
 
   }
@@ -56,7 +56,7 @@ resource "aws_subnet" "public-subnet-2" {
   availability_zone = local.zone2
 
   tags = {
-    Name                         = "public-subnet-2"
+    Name                     = "eks-public-subnet-2"
     "kubernetes.io/role/elb" = "1"
 
   }
@@ -66,7 +66,7 @@ resource "aws_eip" "nat-eip" {
   domain = "vpc"
 
   tags = {
-    Name = "nat-eip"
+    Name = "eks-nat-eip"
   }
 }
 
@@ -76,7 +76,7 @@ resource "aws_nat_gateway" "nat-gateway" {
   subnet_id     = aws_subnet.public-subnet-1.id
 
   tags = {
-    Name = "nat-gateway"
+    Name = "eks-nat-gateway"
   }
 
   depends_on = [aws_eip.nat-eip]
@@ -91,7 +91,7 @@ resource "aws_route_table" "private-rt" {
   }
 
   tags = {
-    Name = "private-rt"
+    Name = "eks-private-rt"
   }
 }
 
@@ -104,7 +104,7 @@ resource "aws_route_table" "public-rt" {
   }
 
   tags = {
-    Name = "public-rt"
+    Name = "eks-public-rt"
   }
 }
 
