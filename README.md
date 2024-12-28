@@ -32,6 +32,10 @@ pipeline setup:
 3) add iam user 'leumi-user' as credentials
 4) install plugins: docker pipeline, Amazon ECR.
 
+Question1:
+setting up the jenkins master and agent within a seperate vpc.
+setting up the eks vpc and the whole cluster, using terraform init within the EKS folder. 
+after running init, must copy the new vpc id into the script 'installlbcontroller', and run the script.
 
 
 
