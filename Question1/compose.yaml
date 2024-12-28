@@ -1,7 +1,7 @@
 services:
   flask:
     build:
-      context: App
+      context: AppCode
       dockerfile: Dockerfile
     image: flask
     ports: 

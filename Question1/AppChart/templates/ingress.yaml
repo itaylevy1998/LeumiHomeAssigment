@@ -5,7 +5,7 @@ metadata:
   namespace: default
   annotations:
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 443}]' # Fixed JSON format
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 443}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
 spec:
   ingressClassName: alb

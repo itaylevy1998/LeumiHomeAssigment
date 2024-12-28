@@ -26,7 +26,7 @@ def forecast():
     city = request.args.get('city', "")
     # my_key = "SUWK9ET8MFNECXY3SCNQK464H"
     load_dotenv()
-    my_key = os.getenv("my_key")
+    my_key = os.getenv("API_KEY")
     weather_url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}/next6days?unitGroup=metric&elements=datetime%2CdatetimeEpoch%2Cname%2Caddress%2Clatitude%2Clongitude%2Ctempmax%2Ctempmin%2Ctemp%2Chumidity&include=days&key={my_key}&contentType=json"
     country_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1&format=json"
     try:

@@ -19,3 +19,9 @@ spec:
         image: 831926627653.dkr.ecr.eu-west-3.amazonaws.com/leumi/app:1.0
         ports:
         - containerPort: 5000
+        env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key-secret
+                  key: API_KEY

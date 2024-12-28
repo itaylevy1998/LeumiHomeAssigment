@@ -11,12 +11,13 @@ pipeline {
         ECR_APP_REPO = "leumi/app"
         IMAGE_NAME = "flask:latest"
         IMAGE_VERSION = "1.0"
+        CLUSTER_NAME = 'weather-cluster'
+        CLUSTER_REGION = 'eu-west-3'
     }
     stages {
         stage('Build') {
             steps {
                 sh "docker-compose build"
-                sh "docker images"
             }
         }
         stage('Publish') {
@@ -30,11 +31,16 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withCredentials([aws(credentialsId: 'leumi-user')]) {
-                    sh "aws eks --region eu-west-3 update-kubeconfig --name app-cluster" 
-                    sh "helm upgrade --install app ./appChart"
+                withCredentials([aws(credentialsId: 'eks-user')]) {
+                    sh "aws eks --region ${CLUSTER_REGION} update-kubeconfig --name ${CLUSTER_NAME}" 
+                    sh "helm upgrade --install app ./AppChart"
                 }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 
