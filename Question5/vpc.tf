@@ -52,16 +52,16 @@ resource "aws_vpc_security_group_ingress_rule" "allow_leumi_proxy" {
   ip_protocol       = "tcp"
   from_port         = 80
   to_port           = 80
-  cidr_ipv4         = "0.0.0.0/0"
+  cidr_ipv4         = "91.231.246.50"
 }
 
-resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
-  security_group_id = aws_security_group.test-ec2-sg.id
-  ip_protocol       = "tcp"
-  from_port         = 22
-  to_port           = 22
-  cidr_ipv4         = "0.0.0.0/0"
-}
+# resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+#   security_group_id = aws_security_group.test-ec2-sg.id
+#   ip_protocol       = "tcp"
+#   from_port         = 22
+#   to_port           = 22
+#   cidr_ipv4         = "0.0.0.0/0"
+# }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_outbound_test-ec2" {
   security_group_id = aws_security_group.test-ec2-sg.id

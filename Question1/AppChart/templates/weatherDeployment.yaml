@@ -5,7 +5,7 @@ metadata:
   labels:
     app: weather-app
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: weather-app
@@ -15,13 +15,13 @@ spec:
         app: weather-app
     spec:
       containers:
-      - name: flask
-        image: 831926627653.dkr.ecr.eu-west-3.amazonaws.com/leumi/app:1.0
-        ports:
-        - containerPort: 5000
-        env:
+        - name: flask
+          image: {{ .Values.image.repository }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
             - name: API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: api-key-secret
+                  name: {{ .Values.secret.name }}
                   key: API_KEY
